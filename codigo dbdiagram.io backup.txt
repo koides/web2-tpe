@@ -1,0 +1,27 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table canciones {
+  cancion varchar [primary key]
+  album varchar
+  track int
+  duracion int
+}
+
+Table albumes {
+  album varchar [primary key]
+  artista varchar
+  anio int
+  discografica varchar
+}
+
+Table artistas {
+  artista varchar [primary key]
+  anio_debut int
+  origen varchar
+  genero varchar
+}
+
+Ref: canciones.album > albumes.album // many-to-one
+
+Ref: albumes.artista > artistas.artista
