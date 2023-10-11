@@ -1,21 +1,21 @@
-<?php require 'templates/header.phtml' ?>
+<?php require './app/templates/header.phtml' ?>
 
-<?php /*require 'templates/form_alta.phtml' */?>
+<?php /*require 'templates/form_alta.phtml' */ ?>
 
 <ul class="list-group">
-<?php foreach($music as $item): ?>
-    <li class="list-group-item item-task <?php if($item->finalizada): ?> finalizada <?php endif ?>">
-        <div>
-            <b><?= $item->cancion_nombre ?></b> | <?=substr($item->album,0,25)?> | (Duracion <?= $item->duracion ?>)
-        </div>
-        <div class="actions">
-            <a href="eliminar/<?= $item->id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
-        </div>
-    </li>
-<?php endforeach ?>
+    <?php foreach ($music as $item) : ?>
+        <li class="list-group-item item-task <?php if ($item->finalizada) : ?> finalizada <?php endif ?>">
+            <div>
+                <b><?= $item->cancion_nombre ?></b> | <?= substr($item->album, 0, 25) ?> | (Duracion <?= $item->duracion ?>)
+            </div>
+            <div class="actions">
+                <a href="eliminar/<?= $item->id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+            </div>
+        </li>
+    <?php endforeach ?>
 </ul>
 
-<p class="mt-3"><small>Mostrando <?=$count?> canciones</small></p>
+<p class="mt-3"><small>Mostrando <?= $count ?> canciones</small></p>
 
 
-<?php require 'templates/footer.phtml' ?>
+<?php require './app/templates/footer.phtml' ?>

@@ -1,14 +1,14 @@
 <?php
-require_once './app/controllers/musicController.php';
+require_once './app/controllers/music.controller.php';
 
-define ('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' .$_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
+define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
 $action = 'list'; //acction por defecto
-if (!empty( $_GET['action'])) {
+if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-//listar    ->              musicControler->showMusic();
+//list    ->              musicControler->showMusic();
 
 //parsea la acction para separar accion de parametros
 $params = explode('/', $action);
