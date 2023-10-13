@@ -1,8 +1,8 @@
 <?php
 require_once './app/views/music.view.php';
 require_once './app/models/music.model.php';
-
 class MusicController
+
 {
     private $model;
     private $view;
