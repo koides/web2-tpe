@@ -4,6 +4,11 @@
     RewriteCond %{REQUEST_FILENAME} -d
 
     RewriteRule \.(?:css|js|jpe?g|gif|png)$ - [L]
+<<<<<<< HEAD
 
     RewriteRule ^(.*)$ router.php?action=$1 [QSA,L]
 </IfModule>
+=======
+    RewriteRule ^(.*)$ router.php?action=$1 [QSA,L]
+</IfModule>
+>>>>>>> f0776f196a3d860a84d1628745aae09948750a8a
