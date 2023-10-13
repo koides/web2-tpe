@@ -2,7 +2,7 @@ Web 2 - Trabajo Practico Especial - Parte 1
 
 Integrantes:
 Braian Ricci, DNI: 35.562.572, e-mail: braianricci@gmail.com
-Fernando Martin Cordeschi, DNI: 29.555.240, e-mail: fernanocordeschi@hotmail.com
+Fernando Martin Cordeschi, DNI: 29.555.240, e-mail: fernandocordeschi@hotmail.com
 
 Tematica:
 Albumes seleccionados de las decadas de los 80s y 90s.
