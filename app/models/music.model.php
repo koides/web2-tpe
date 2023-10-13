@@ -1,6 +1,6 @@
 <?php
-class MusicModel
-{
+class MusicModel {
+
     private $db;
 
     public function __construct()
@@ -9,8 +9,7 @@ class MusicModel
             . 'dbname=musica; charset=utf8', 'root', '');
     }
 
-    public function getMusic()
-    {
+    public function get_all(){
         $query = $this->db->prepare('SELECT * FROM canciones');
         $query->execute();
 

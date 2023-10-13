@@ -6,14 +6,13 @@ class MusicController {
     private $model;
     private $view;
 
-    public function __contruct() {
+    public function __construct() {
         $this->model = new MusicModel();
         $this->view = new MusicView();
     }
 
     public function listMusic() {
         //le pedimos la lista de musica al modelo
-        $numero = 0;
         echo var_dump($this->model);
         echo "cosa";
         //$music = $this->model->getMusic();
