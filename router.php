@@ -8,7 +8,8 @@ if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-//list    ->              musicControler->showMusic();
+//list      ->          musicController->showMusic();
+//add       ->          musicController->addMusic();
 
 //parsea la acction para separar accion de parametros
 $params = explode('/', $action);
@@ -18,6 +19,9 @@ switch ($params[0]) {
         $controller = new MusicController();
         $controller->listMusic();
         break;
+    case 'add':
+        $controller = new MusicContrllr();
+        $controller->addMusic();
     default:
         echo "404 IMPLEMENTAR PLS";
 }
