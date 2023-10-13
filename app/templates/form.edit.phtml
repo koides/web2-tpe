@@ -1,0 +1,28 @@
+<form action="add" method="POST" class="my-4">
+    <div class="row">
+        <div class="form-group">
+            <label>editando Album concha de tu madre</label>
+            <input required name="album" type="text" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Artista</label>
+            <input required name="artista" type="text" class="form-control"> 
+        </div>
+    </div>
+
+    <div class=row>
+        <div class="col-6">
+            <label>Año</label>
+            <input required name="anio" type="number" placeholder="Ingrese duración (en segundos)" class="form-control">
+        </div>
+    
+        <div class="col-6">
+            <label>Discográfica</label>
+            <input required name="discografica" type="text" class="form-control">
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-2">Guardar Cambios</button>
+    <a type="button" href="cancel" class="btn btn-danger mt-2">Cancelar Edicion</a>
+</form>

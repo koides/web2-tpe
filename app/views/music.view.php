@@ -1,17 +1,20 @@
 <?php
 
-class MusicView
-{
-    public function showMusic($music)
-    {
-        $count = count($music);
+class MusicView {
+    public $form = './app/templates/form.add.phtml';
 
-        // NOTA: el template va a poder acceder a todas las variables y constantes que tienen alcance en esta funcion
-
+    public function showMusic($music) {
         // mostrar el template
-        require './app/templates/musicList.phtml';
+        require './app/templates/music.list.phtml';
     }
 
+    public function editMode() {
+        $this->form = './app/templates/form.edit.phtml';
+    }
+
+    public function normalMode() {
+        $this->form = './app/templates/form.add.phtml';
+    }
     /*public function showError($error) {
         require 'templates/error.phtml';
     }*/
