@@ -13,6 +13,7 @@ if (!empty($_GET['action'])) {
 //remove    ->          musicController->removeMusic();
 //edit      ->          musicController->editMusic();
 //cancel    ->          musicController->cancelEdit();
+//save      ->          musicController->saveEdit();
 
 //parsea la acction para separar accion de parametros
 $params = explode('/', $action);
@@ -36,8 +37,11 @@ switch ($params[0]) {
         break;
     case 'cancel':
         $controller = new MusicController();
-        $controller->editCancel();
+        $controller->cancelEdit();
         break;
+    case 'save':
+        $controller = new MusicController();
+        $controller->saveEdit($params[1]);
     default:
         echo "404 IMPLEMENTAR PLS";
 }

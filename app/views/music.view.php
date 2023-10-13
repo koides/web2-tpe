@@ -8,12 +8,9 @@ class MusicView {
         require './app/templates/music.list.phtml';
     }
 
-    public function editMode() {
+    public function loadForm($album, $music) { 
         $this->form = './app/templates/form.edit.phtml';
-    }
-
-    public function normalMode() {
-        $this->form = './app/templates/form.add.phtml';
+        require './app/templates/music.list.phtml';
     }
     /*public function showError($error) {
         require 'templates/error.phtml';

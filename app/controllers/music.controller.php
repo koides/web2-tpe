@@ -48,16 +48,32 @@ class MusicController
     }
 
     public function editMusic($id) {
+        //conseguimos los datos del item a editar
         $album = $this->model->getAlbum($id);
-        $this->view->editMode();
-        
-        $this->listMusic();
+        $music = $this->model->getMusic();
+
+        $this->view->loadForm($album, $music);
+
         //header('Location: ' . BASE_URL);
     }
 
-    public function editCancel() {
-        $this->view->normalMode();
-        
-        header('Location: ' . BASE_URL);                
+    public function cancelEdit() {
+        header('Location: ' . BASE_URL);
+    }
+
+    public function saveEdit($id) {
+        $album= $_POST['album'];
+        $artista= $_POST['artista'];
+        $anio= $_POST['anio'];
+        $discografica= $_POST['discografica'];
+
+        //validaciones
+        if (empty($album) || empty($artista) || empty($anio) || empty($discografica)) {
+            //$this->view->showError("Debe completar todos los campos");
+            return;
+        }
+
+        $this->model->saveAlbum($id, $album, $artista, $anio, $discografica);
+        header('Location: ' . BASE_URL);
     }
 }

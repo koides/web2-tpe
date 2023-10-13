@@ -36,4 +36,9 @@ class MusicModel
         $query = $this->db->prepare('DELETE FROM albumes WHERE album_id =?');
         $query->execute([$id]);
     }
+
+    public function saveAlbum($id, $album, $artista, $anio, $discografica) {
+        $query = $this->db->prepare('UPDATE albumes SET album_nombre=?, artista=?, anio=?, discografica=? WHERE album_id=?');
+        $query->execute([$album, $artista, $anio, $dicografica, $id]);
+    }
 }
