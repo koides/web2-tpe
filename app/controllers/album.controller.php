@@ -36,12 +36,12 @@ class AlbumController
         if (isset($id)) {
             //si se paso id, quiere decir que estoy modificando un item
             $this->model->saveAlbum($album, $artista, $anio, $discografica, $id);
-            header('Location: ' . BASE_URL);
+            header('Location: ' . BASE_URL . 'albums');
         } else {
             //de no pasarse un id, se agrega un nuevo item
             $set = $this->model->saveAlbum($album, $artista, $anio, $discografica);
             if ($set) {
-                header('Location: ' . BASE_URL);
+                header('Location: ' . BASE_URL . 'albums');
             } else {
                 echo "cuak";
                 //$this->view->showError("Error al insertar la tarea");
@@ -51,7 +51,7 @@ class AlbumController
 
     public function remove($id) {
         $this->model->deleteAlbum($id);
-        header('Location: ' . BASE_URL);                
+        header('Location: ' . BASE_URL . 'albums');                
     }
 
     public function edit($id) {
@@ -60,8 +60,6 @@ class AlbumController
         $music = $this->model->getAlbums();
 
         $this->view->loadForm($album, $music);
-
-        //header('Location: ' . BASE_URL);
     }
 
     public function cancel() {

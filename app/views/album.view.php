@@ -1,7 +1,7 @@
 <?php
 
 class AlbumView {
-    public $form = './app/templates/form.add.album.phtml';
+    private $form = './app/templates/form.add.album.phtml';
 
     public function showMusic($music) {
         // mostrar el template

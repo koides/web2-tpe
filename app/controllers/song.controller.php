@@ -35,7 +35,7 @@ class SongController {
         if (isset($id)) {
             //si se paso id, quiere decir que estoy modificando un item
             $this->model->saveSong($cancion, $album, $duracion, $track, $id);
-            header('Location: ' . BASE_URL);
+            header('Location: ' . BASE_URL . 'songs');
         } else {
             //de no pasarse un id, se agrega un nuevo item
             $set = $this->model->saveSong($cancion, $album, $duracion, $track, $id);
@@ -54,7 +54,11 @@ class SongController {
     }
 
     public function edit($id) {
-
+        $song = $this->model->getSong($id);
+        $songs = $this->model->getSongs();
+        $albums = $this->model->getAlbums();
+    
+        $this->view->editForm($song, $songs, $albums);
     }
 
     public function cancel() {
