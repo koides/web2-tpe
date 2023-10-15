@@ -1,6 +1,5 @@
 <?php
-class MusicModel
-{
+class MusicModel {
     private $db;
 
     public function __construct() {
