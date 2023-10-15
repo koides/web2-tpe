@@ -2,7 +2,8 @@
 require_once './app/views/music.view.php';
 require_once './app/models/music.model.php';
 
-class MusicController {
+class MusicController
+{
     private $model;
     private $view;
 
@@ -20,25 +21,59 @@ class MusicController {
     }
 
     public function addMusic() {
-        //consigo los datos del usuario
-        $cancion = $_POST['cancion'];
-        $album = $_POST['album'];
-        $duracion = $_POST['duracion'];
-        $track = $_POST['track'];
+        //consigo los datos del formulario
+        $album= $_POST['album'];
+        $artista= $_POST['artista'];
+        $anio= $_POST['anio'];
+        $discografica= $_POST['discografica'];
 
         //validaciones
-        if (empty($cancion) || empty($album) || empty($duracion) || empty($track)) {
+        if (empty($album) || empty($artista) || empty($anio) || empty($discografica)) {
             //$this->view->showError("Debe completar todos los campos");
             return;
         }
 
-        $id = $this->model->insertMusic($cancion, $album, $duracion, $track);
+        $id = $this->model->insertMusic($album, $artista, $anio, $discografica);
         if ($id) {
             header('Location: ' . BASE_URL);
         } else {
-            header('Location: ' . BASE_URL);
             echo "cuak";
             //$this->view->showError("Error al insertar la tarea");
         }
-    } 
+    }
+
+    public function removeMusic($id) {
+        $this->model->deleteMusic($id);
+        header('Location: ' . BASE_URL);                
+    }
+
+    public function editMusic($id) {
+        //conseguimos los datos del item a editar
+        $album = $this->model->getAlbum($id);
+        $music = $this->model->getMusic();
+
+        $this->view->loadForm($album, $music);
+
+        //header('Location: ' . BASE_URL);
+    }
+
+    public function cancelEdit() {
+        header('Location: ' . BASE_URL);
+    }
+
+    public function saveEdit($id) {
+        $album= $_POST['album'];
+        $artista= $_POST['artista'];
+        $anio= $_POST['anio'];
+        $discografica= $_POST['discografica'];
+
+        //validaciones
+        if (empty($album) || empty($artista) || empty($anio) || empty($discografica)) {
+            //$this->view->showError("Debe completar todos los campos");
+            return;
+        }
+
+        $this->model->saveAlbum($id, $album, $artista, $anio, $discografica);
+        header('Location: ' . BASE_URL);
+    }
 }

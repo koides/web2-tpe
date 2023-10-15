@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2023 at 11:55 AM
+-- Generation Time: Oct 13, 2023 at 09:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,7 +33,14 @@ CREATE TABLE `albumes` (
   `artista` varchar(50) NOT NULL,
   `anio` int(4) NOT NULL,
   `discografica` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `albumes`
+--
+
+INSERT INTO `albumes` (`album_id`, `album_nombre`, `artista`, `anio`, `discografica`) VALUES
+(2, 'The Piper at the Gates of Dawn', 'Pink Floyd', 1967, 'EMI Columbia');
 
 -- --------------------------------------------------------
 
@@ -42,12 +49,12 @@ CREATE TABLE `albumes` (
 --
 
 CREATE TABLE `canciones` (
-  `cancion_id` int(3) NOT NULL,
+  `cancion_id` int(4) NOT NULL,
   `cancion_nombre` varchar(50) NOT NULL,
   `album` int(3) NOT NULL,
-  `track` int(2) NOT NULL,
-  `duracion` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `duracion` int(4) NOT NULL,
+  `track` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
 -- Indexes for dumped tables
@@ -64,7 +71,23 @@ ALTER TABLE `albumes`
 --
 ALTER TABLE `canciones`
   ADD PRIMARY KEY (`cancion_id`),
-  ADD KEY `FK_album` (`album`) USING BTREE;
+  ADD KEY `FK_album` (`album`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `albumes`
+--
+ALTER TABLE `albumes`
+  MODIFY `album_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `canciones`
+--
+ALTER TABLE `canciones`
+  MODIFY `cancion_id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -74,7 +97,7 @@ ALTER TABLE `canciones`
 -- Constraints for table `canciones`
 --
 ALTER TABLE `canciones`
-  ADD CONSTRAINT `canciones_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`album_id`);
+  ADD CONSTRAINT `canciones_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`album_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
