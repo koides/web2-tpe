@@ -1,47 +1,45 @@
 <?php
-require_once './app/controllers/music.controller.php';
+require_once './app/controllers/album.controller.php';
+require_once './app/controllers/song.controller.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
-$action = 'list'; //acction por defecto
+$action = 'albums'; //acction por defecto
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-//list      ->          musicController->showMusic();
-//add       ->          musicController->addMusic();
-//remove    ->          musicController->removeMusic();
-//edit      ->          musicController->editMusic();
-//cancel    ->          musicController->cancelEdit();
-//save      ->          musicController->saveEdit();
+//parsea la action para separar accion de parametros
+function parseUrl($url) {
+    $url_data = explode("/", $url);
 
-//parsea la acction para separar accion de parametros
-$params = explode('/', $action);
+    //guardamos la categoria que afectara la accion
+    $arrayReturn['category'] = $url_data[0];
+    //guardamos la accion en si, en caso de que este vacia sera null
+    $arrayReturn['action'] = isset($url_data[1]) && $url_data[1] != "" ? $url_data[1] : null;
+    //guardamos el id en caso de que exista, sino null
+    $arrayReturn['id'] = isset($url_data[2]) && $url_data[2] != "" ? $url_data[2] : null;
 
-switch ($params[0]) {
-    case 'list':
-        $controller = new MusicController();
-        $controller->listMusic();
-        break;
-    case 'add':
-        $controller = new MusicController();
-        $controller->addMusic();
-        break;
-    case 'remove':
-        $controller = new MusicController();
-        $controller->removeMusic($params[1]);
-        break;
-    case 'edit':
-        $controller = new MusicController();
-        $controller->editMusic($params[1]);
-        break;
-    case 'cancel':
-        $controller = new MusicController();
-        $controller->cancelEdit();
-        break;
-    case 'save':
-        $controller = new MusicController();
-        $controller->saveEdit($params[1]);
-    default:
-        echo "404 IMPLEMENTAR PLS";
+    return $arrayReturn;
+}
+
+$params = parseUrl($action);
+$controller;
+
+switch ($params['category']) {
+    case 'albums':  $controller = new AlbumController();    break;
+    case 'songs':   $controller = new SongController();     break;
+
+    default: echo "404 error de categoria";
+}
+
+switch ($params['action']) {
+    case null:      $controller->list   ();                 break;
+    case 'add':     $controller->save   ();                 break;
+    case 'remove':  $controller->remove ($params['id']);    break;
+    case 'edit':    $controller->edit   ($params['id']);    break;
+    case 'save':    $controller->save   ($params['id']);    break;
+    case 'cancel':  $controller->cancel ();                 break;
+
+    default: echo "404 implementar pls";
 }

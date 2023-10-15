@@ -1,0 +1,27 @@
+<form action="albums/add" method="POST" class="my-4">
+    <div class="row">
+        <div class="form-group">
+            <label>Album</label>
+            <input required name="album" type="text" placeholder="Ingrese el nombre del album" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Artista</label>
+            <input required name="artista" type="text" placeholder="Ingrese el artista" class="form-control"> 
+        </div>
+    </div>
+
+    <div class=row>
+        <div class="col-6">
+            <label>Año</label>
+            <input required name="anio" type="number" placeholder="Ingrese el año" class="form-control">
+        </div>
+    
+        <div class="col-6">
+            <label>Discográfica</label>
+            <input required name="discografica" type="text" placeholder="Ingrese el sello discográfico" class="form-control">
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-2">Agregar</button>
+</form>

@@ -6,11 +6,11 @@
     <?php foreach ($music as $item) : ?>
         <li class="list-group-item item-task <?php if ($item->finalizada) : ?> finalizada <?php endif ?>">
             <div>
-                <b><?= $item->album_nombre ?></b> | <?= substr($item->artista, 0, 25) ?> | Año: <?= $item-> anio ?>
+                <b><?= $item->album_nombre ?></b> | <?= $item->artista ?> | Año: <?= $item-> anio ?> | Discografica: <?= $item->discografica ?>
             </div>
             <div class="actions">
-                <a href="edit/<?= $item->album_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
-                <a href="remove/<?= $item->album_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+                <a href="albums/edit/<?= $item->album_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
+                <a href="albums/remove/<?= $item->album_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
             </div>
         </li>
     <?php endforeach ?>

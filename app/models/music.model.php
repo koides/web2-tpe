@@ -6,13 +6,12 @@ class MusicModel {
         $this->db = new PDO('mysql:host=localhost; dbname=musica; charset=utf8', 'root', '');
     }
 
-    public function getMusic() {
+    public function getAlbums() {
         $query = $this->db->prepare('SELECT * FROM albumes');
         $query->execute();
 
-        $music = $query->fetchAll(PDO::FETCH_OBJ);
-
-        return $music;
+        $albums = $query->fetchAll(PDO::FETCH_OBJ);
+        return $albums;
     }
 
     public function getAlbum($id) {
@@ -20,24 +19,48 @@ class MusicModel {
         $query->execute([$id]);
 
         $album = $query->fetch(PDO::FETCH_OBJ);
-
         return $album;
     }
     
-    public function insertMusic($album, $artista, $anio, $discografica) {
-        $query = $this->db->prepare('INSERT INTO albumes (album_nombre, artista, anio, discografica) VALUES(?,?,?,?)');
-        $query->execute([$album, $artista, $anio, $discografica]);
+    public function getSongs() {
+        $query = $this->db->prepare('SELECT canciones.*, albumes.album_nombre FROM canciones INNER JOIN albumes ON canciones.album = albumes.album_id');
+        $query->execute();
 
-        return $this->db->lastInsertId();
+        $songs = $query->fetchAll(PDO::FETCH_OBJ);
+        return $songs;
+    }
+    
+    public function saveSong($cancion, $album, $duracion, $track, $id = null) {
+        if (isset($id)) {
+            $query = $this->db->prepare('UPDATE canciones SET cancion_nombre=?, album=?, duracion=?, track=? WHERE cancion_id=?')
+            $query->execute([$cancion, $album, $duracion, $track, $id]);
+        } else {
+            $query = $this->db->prepare('INSERT INTO canciones (cancion_nombre, album, duracion, track) VALUES(?, ?, ?, ?)');
+            $query->execute([$cancion, $album, $duracion, $track]);
+
+            return $this->db->lastInsertId();
+        }
     }
 
-    public function deleteMusic($id) {
+    public function deleteAlbum($id) {
         $query = $this->db->prepare('DELETE FROM albumes WHERE album_id =?');
         $query->execute([$id]);
     }
 
-    public function saveAlbum($id, $album, $artista, $anio, $discografica) {
-        $query = $this->db->prepare('UPDATE albumes SET album_nombre=?, artista=?, anio=?, discografica=? WHERE album_id=?');
-        $query->execute([$album, $artista, $anio, $dicografica, $id]);
+    public function saveAlbum($album, $artista, $anio, $discografica, $id = null) {
+        if (isset($id)) {
+            $query = $this->db->prepare('UPDATE albumes SET album_nombre=?, artista=?, anio=?, discografica=? WHERE album_id=?');
+            $query->execute([$album, $artista, $anio, $discografica, $id]);
+        } else {
+            $query = $this->db->prepare('INSERT INTO albumes (album_nombre, artista, anio, discografica) VALUES(?, ?, ?, ?)');
+            $query->execute([$album, $artista, $anio, $discografica]);
+
+            return $this->db->lastInsertId();
+        }
+    }
+
+    public function deleteSong($id) {
+        $query = $this->db->prepare('DELETE FROM canciones WHERE cancion_id=?');
+        $query->execute([$id]);
     }
 }

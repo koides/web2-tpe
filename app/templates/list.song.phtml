@@ -1,0 +1,19 @@
+<?php require './app/templates/header.phtml' ?>
+
+<?php require $this->form; ?>
+
+<ul class="list-group">
+    <?php foreach ($songs as $item) : ?>
+        <li class="list-group-item item-task">
+            <div>
+                <b><?= $item->cancion_nombre ?></b> | <?= $item->album_nombre ?> | Duración : <?= $item->duracion ?> | Track : <?= $item->track ?>
+            </div>
+            <div class="actions">
+                <a href="songs/edit/<?= $item->cancion_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
+                <a href="songs/remove/<?= $item->cancion_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+            </div>
+        </li>
+    <?php endforeach ?>
+</ul>
+
+<?php require './app/templates/footer.phtml' ?>
