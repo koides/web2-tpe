@@ -35,12 +35,12 @@ class SongController {
         if (isset($id)) {
             //si se paso id, quiere decir que estoy modificando un item
             $this->model->saveSong($cancion, $album, $duracion, $track, $id);
-            header('Location: ' . BASE_URL . 'songs');
+            header('Location: ' . BASE_URL . 'songs/list');
         } else {
             //de no pasarse un id, se agrega un nuevo item
             $set = $this->model->saveSong($cancion, $album, $duracion, $track, $id);
             if ($set) {
-                header('Location: ' . BASE_URL . 'songs');
+                header('Location: ' . BASE_URL . 'songs/list');
             } else {
                 echo "cuak";
                 //$this->view->showError("Error al insertar la tarea");
@@ -50,7 +50,7 @@ class SongController {
 
     public function remove($id) {
         $this->model->deleteSong($id);
-        header('Location:  ' . BASE_URL . 'songs');                
+        header('Location:  ' . BASE_URL . 'songs/list');                
     }
 
     public function edit($id) {
@@ -59,9 +59,5 @@ class SongController {
         $albums = $this->model->getAlbums();
     
         $this->view->editForm($song, $songs, $albums);
-    }
-
-    public function cancel() {
-        header('Location: ' . BASE_URL . 'songs');
     }
 }

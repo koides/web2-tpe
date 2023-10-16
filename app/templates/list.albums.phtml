@@ -3,8 +3,8 @@
 <?php require $this->form; ?>
 
 <ul class="list-group">
-    <?php foreach ($music as $item) : ?>
-        <li class="list-group-item item-task <?php if ($item->finalizada) : ?> finalizada <?php endif ?>">
+    <?php foreach ($albums as $item) : ?>
+        <li class="list-group-item item-task">
             <div>
                 <b><?= $item->album_nombre ?></b> | <?= $item->artista ?> | Año: <?= $item-> anio ?> | Discografica: <?= $item->discografica ?>
             </div>

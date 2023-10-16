@@ -13,7 +13,7 @@ if (!empty($_GET['action'])) {
 function parseUrl($url) {
     $url_data = explode("/", $url);
 
-    //guardamos la categoria que afectara la accion
+    //guardamos la categoria que sera afectada por la accion
     $arrayReturn['category'] = $url_data[0];
     //guardamos la accion en si, en caso de que este vacia sera null
     $arrayReturn['action'] = isset($url_data[1]) && $url_data[1] != "" ? $url_data[1] : null;
@@ -34,12 +34,11 @@ switch ($params['category']) {
 }
 
 switch ($params['action']) {
-    case null:      $controller->list   ();                 break;
+    case 'list':    $controller->list   ($params['id']);    break;
     case 'add':     $controller->save   ();                 break;
     case 'remove':  $controller->remove ($params['id']);    break;
     case 'edit':    $controller->edit   ($params['id']);    break;
     case 'save':    $controller->save   ($params['id']);    break;
-    case 'cancel':  $controller->cancel ();                 break;
 
     default: echo "404 implementar pls";
 }
