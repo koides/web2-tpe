@@ -8,7 +8,7 @@ class AuthController {
     private $view;
     private $model;
 
-    function __construct() {
+    public function __construct() {
         $this->model = new UserModel();
         $this->view = new AuthView();
     }
@@ -29,7 +29,7 @@ class AuthController {
         //buscamos el usuario
         $user = $this->model->getByUser($user);
         if ($user && password_verify($password, $user->password)) {
-            //ACA LO AUTENTIQUE
+            //ya estamos autenticados
             
             AuthHelper::login($user);
             
@@ -41,6 +41,6 @@ class AuthController {
 
     public function logout() {
         AuthHelper::logout();
-        header('Location: ' . BASE_URL);    
+        header('Location: ' . BASE_URL . 'albums/list');    
     }
 }

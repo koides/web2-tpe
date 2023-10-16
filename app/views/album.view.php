@@ -1,7 +1,14 @@
 <?php
 
 class AlbumView {
-    private $form = './app/templates/form.add.album.phtml';
+    private $session;
+    private $form;
+
+    public function __construct() {
+        //guardamos el estado de la sesion para saber que mostrar y que no
+        $this->session = AuthHelper::check();
+        $this->form = './app/templates/form.add.album.phtml';  
+    }
 
     public function showAlbums($albums) {
         require './app/templates/list.albums.phtml';

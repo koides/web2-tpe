@@ -28,6 +28,9 @@ class SongController {
     }
 
     public function save($id = null) {
+        //checkeamos que estemos logueado
+        AuthHelper::verify();
+
         //consigo los datos del formulario
         $cancion= $_POST['cancion'];
         $album= $_POST['album'];
@@ -57,11 +60,17 @@ class SongController {
     }
 
     public function remove($id) {
+        //checkeamos que estemos logueado
+        AuthHelper::verify();
+        
         $this->model->deleteSong($id);
         header('Location:  ' . BASE_URL . 'songs/list');                
     }
 
     public function edit($id) {
+        //checkeamos que estemos logueado
+        AuthHelper::verify();
+
         $song = $this->model->getSong($id);
         $songs = $this->model->getSongs();
         $albums = $this->model->getAlbums();

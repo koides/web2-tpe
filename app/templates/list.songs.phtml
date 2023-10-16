@@ -1,6 +1,6 @@
 <?php require './app/templates/header.phtml' ?>
 
-<?php require $this->form; ?>
+<?php if ($this->session) : require $this->form; endif ?>
 
 <ul class="list-group">
     <?php foreach ($songs as $item) : ?>
@@ -13,10 +13,12 @@
                 | Duración : <?= $item->duracion ?>
                 | Track : <?= $item->track ?>
             </div>
+            <?php if ($this->session) : ?>
             <div class="actions">
                 <a href="songs/edit/<?= $item->cancion_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
                 <a href="songs/remove/<?= $item->cancion_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
             </div>
+            <?php endif ?>
         </li>
     <?php endforeach ?>
 </ul>

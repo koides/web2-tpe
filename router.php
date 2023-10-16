@@ -4,12 +4,12 @@ require_once './app/controllers/album.controller.php';
 require_once './app/controllers/song.controller.php';
 require_once './app/controllers/auth.controller.php';
 
-define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
-
-$action = 'albums'; //acction por defecto
+$action = 'albums/list'; //acction por defecto
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
+
+
 
 //parsea la action para separar accion de parametros
 function parseUrl($url) {
@@ -44,6 +44,7 @@ switch ($params['action']) {
     case 'rmvall':  $controller->rmvall     ($params['id']);    break;
     case 'login':   $controller->showLogin  ();                 break;
     case 'auth':    $controller->auth       ();                 break;
+    case 'logout':  $controller->logout     ();                 break;
 
     default: echo "404 implementar pls";
 }

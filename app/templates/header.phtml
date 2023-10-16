@@ -30,14 +30,14 @@
                             <a class="nav-link" aria-current="page" href="songs/list">Canciones</a>
                         </li>
 
-                        <?php if (!isset($_SESSION['USER_ID'])) : ?>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="users/login">Login</a>
-                        </li>
+                        <?php if ($this->session) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="users/logout">Logout (<?= $_SESSION['USER_NAME'] ?>)</a>
+                            </li>
                         <?php else : ?>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="logout">Logout (<?= $_SESSION['USER_EMAIL'] ?>)</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="users/login">Login</a>
+                            </li>
                         <?php endif ?>
                     </ul>
                 </div>

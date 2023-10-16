@@ -30,6 +30,9 @@ class AlbumController
     }
 
     public function save($id = null) {
+        //checkeamos que estemos logueado
+        AuthHelper::verify();
+
         //consigo los datos del formulario
         $album= $_POST['album'];
         $artista= $_POST['artista'];
@@ -59,6 +62,9 @@ class AlbumController
     }
 
     public function remove($id) {
+        //checkeamos que estemos logueado
+        AuthHelper::verify();
+
         $count = $this->model->checkAlbum($id);
         if ( $count > 0 ) {
             $albums = $this->model->getAlbums();
@@ -69,6 +75,9 @@ class AlbumController
     }
 
     public function rmvall($id) {
+        //checkeamos que estemos logueado
+        AuthHelper::verify();
+
         //conseguimos los items a borrar
         $songs = $this->model->getAlbumSongs($id);
         $album = $this->model->getAlbum($id);
@@ -81,6 +90,9 @@ class AlbumController
     }
 
     public function edit($id) {
+        //checkeamos que estemos logueado
+        AuthHelper::verify();
+
         //conseguimos los datos del item a editar
         $album = $this->model->getAlbum($id);
         $albums= $this->model->getAlbums();

@@ -1,7 +1,13 @@
 <?php
 
 class SongView {
-    private $form = './app/templates/form.add.song.phtml';
+    private $form;
+    private $session;
+
+    public function __construct() {
+        $this->form = './app/templates/form.add.song.phtml';
+        $this->session = AuthHelper::check(); 
+    }
 
     public function showSongs($songs, $albums) {
         foreach ($songs as $song) {
