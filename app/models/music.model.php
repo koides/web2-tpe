@@ -1,9 +1,10 @@
 <?php
+
 class MusicModel{
     private $db;
     
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost; dbname=musica; charset=utf8', 'root', '');
+        $this->db = new PDO(DB_CONNECT_STRING, DB_USER, DB_PASS);
     }
     
     public function getAlbums() {
@@ -71,15 +72,29 @@ class MusicModel{
         }
     }
 
-    public function deleteAlbum($id) {
-        $query = $this->db->prepare('DELETE FROM albumes WHERE album_id =?');
+    public function checkAlbum($id) {
+        //hacemos un query contando si el album tiene canciones asignadas
+        $query = $this->db->prepare('SELECT COUNT(cancion_id) FROM canciones WHERE album=?');
         $query->execute([$id]);
+        $songCount = $query->fetch(PDO::FETCH_NUM);
+
+        if ($songCount[0] == 0 ) {
+            //en caso de no tenerlas, lo borramos sin mas
+            $query = $this->db->prepare('delete from albumes where album_id=?');
+            $query->execute([$id]);
+        }
+
+        //devolvemos la cantidad de canciones, para darle la eleccion al usuario
+        return $songCount[0];
     }
 
+    public function deleteAlbum($id) {
+        $query = $this->db->prepare('delete from albumes where album_id=?');
+        $query->execute([$id]);
+    }
 
     public function deleteSong($id) {
         $query = $this->db->prepare('DELETE FROM canciones WHERE cancion_id=?');
         $query->execute([$id]);
     }
-
 }

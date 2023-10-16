@@ -24,6 +24,12 @@ class AlbumView {
         $this->form = './app/templates/form.edit.album.phtml';
         require './app/templates/list.albums.phtml';
     }
+
+    public function removeConfirmation($count, $id, $albums) {
+        $this->form = './app/templates/form.remove.album.phtml';
+        require './app/templates/list.albums.phtml';
+    }
+
     /*public function showError($error) {
         require 'templates/error.phtml';
     }*/

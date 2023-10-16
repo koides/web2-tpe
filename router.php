@@ -1,6 +1,8 @@
 <?php
+require_once './app/config/config.php';
 require_once './app/controllers/album.controller.php';
 require_once './app/controllers/song.controller.php';
+require_once './app/controllers/auth.controller.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -29,16 +31,19 @@ $controller;
 switch ($params['category']) {
     case 'albums':  $controller = new AlbumController();    break;
     case 'songs':   $controller = new SongController();     break;
-    case 'login':   $controller = new AuthController();     break;
+    case 'users':   $controller = new AuthController();     break;
 
     default: echo "404 error de categoria";
 }
 
 switch ($params['action']) {
-    case 'list':    $controller->list   ($params['id']);    break;
-    case 'save':    $controller->save   ($params['id']);    break;
-    case 'remove':  $controller->remove ($params['id']);    break;
-    case 'edit':    $controller->edit   ($params['id']);    break;
+    case 'list':    $controller->list       ($params['id']);    break;
+    case 'save':    $controller->save       ($params['id']);    break;
+    case 'remove':  $controller->remove     ($params['id']);    break;
+    case 'edit':    $controller->edit       ($params['id']);    break;
+    case 'rmvall':  $controller->rmvall     ($params['id']);    break;
+    case 'login':   $controller->showLogin  ();                 break;
+    case 'auth':    $controller->auth       ();                 break;
 
     default: echo "404 implementar pls";
 }

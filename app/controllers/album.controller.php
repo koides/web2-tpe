@@ -59,7 +59,24 @@ class AlbumController
     }
 
     public function remove($id) {
+        $count = $this->model->checkAlbum($id);
+        if ( $count > 0 ) {
+            $albums = $this->model->getAlbums();
+            $this->view->removeConfirmation($count, $id, $albums);
+        } else {
+            header('Location: ' . BASE_URL . 'albums/list');                
+        }
+    }
+
+    public function rmvall($id) {
+        //conseguimos los items a borrar
+        $songs = $this->model->getAlbumSongs($id);
+        $album = $this->model->getAlbum($id);
+        //borramos todas las canciones primero
+        foreach ($songs as $song) { $this->model->deleteSong($song->cancion_id); }
+        //finalmente el album
         $this->model->deleteAlbum($id);
+
         header('Location: ' . BASE_URL . 'albums/list');                
     }
 
