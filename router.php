@@ -9,8 +9,6 @@ if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-
-
 //parsea la action para separar accion de parametros
 function parseUrl($url) {
     $url_data = explode("/", $url);
