@@ -6,7 +6,12 @@
     <?php foreach ($albums as $item) : ?>
         <li class="list-group-item item-task">
             <div>
-                <b><?= $item->album_nombre ?></b> | <?= $item->artista ?> | Año: <?= $item-> anio ?> | Discografica: <?= $item->discografica ?>
+                <a href="albums/list/<?= $item->album_id ?>">
+                <b><?= $item->album_nombre ?></b>
+                </a>
+                | <?= $item->artista ?>
+                | Año: <?= $item-> anio ?>
+                | Discografica: <?= $item->discografica ?> 
             </div>
             <div class="actions">
                 <a href="albums/edit/<?= $item->album_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>

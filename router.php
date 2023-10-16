@@ -29,16 +29,16 @@ $controller;
 switch ($params['category']) {
     case 'albums':  $controller = new AlbumController();    break;
     case 'songs':   $controller = new SongController();     break;
+    case 'login':   $controller = new AuthController();     break;
 
     default: echo "404 error de categoria";
 }
 
 switch ($params['action']) {
     case 'list':    $controller->list   ($params['id']);    break;
-    case 'add':     $controller->save   ();                 break;
+    case 'save':    $controller->save   ($params['id']);    break;
     case 'remove':  $controller->remove ($params['id']);    break;
     case 'edit':    $controller->edit   ($params['id']);    break;
-    case 'save':    $controller->save   ($params['id']);    break;
 
     default: echo "404 implementar pls";
 }

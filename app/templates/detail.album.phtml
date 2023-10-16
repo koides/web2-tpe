@@ -3,13 +3,20 @@
 <ul class="list-group">
     <li class="list-group-item item-task">
         <div>
-            <b><?= $album->album_nombre ?></b> | <?= $album->artista ?> | Año: <?= $album->anio ?> | Discográfica: <?= $album->discografica ?> | Duración: <?= $duracion ?>
+            <b><?= $album->album_nombre ?></b>
+            | <?= $album->artista ?>
+            | Año: <?= $album->anio ?>
+            | Discográfica: <?= $album->discografica ?>
+            | Duración: <?= $duracion ?>
+            | Numero de tracks: <?= $tracks ?>
         </div>
     </li>
     <?php foreach ($songs as $item) : ?>
         <li class="list-group-item item-task">
             <div>
-                <b><?= $item->track ?></b> | <?= $item->cancion_nombre ?> | Duración: <?= $item->duracion ?>
+                <b><?= $item->track ?></b> 
+                | <a href="songs/list/<?= $item->cancion_id ?>"><?= $item->cancion_nombre ?></a>
+                | Duración: <?= $item->duracion ?>
             </div>
         </li>
     <?php endforeach ?>

@@ -1,5 +1,5 @@
 <?php
-class MusicModel {
+class MusicModel{
     private $db;
     
     public function __construct() {
@@ -7,7 +7,7 @@ class MusicModel {
     }
     
     public function getAlbums() {
-        $query = $this->db->prepare('SELECT * FROM albumes');
+        $query = $this->db->prepare('SELECT * FROM albumes ORDER BY album_nombre');
         $query->execute();
         
         $albums = $query->fetchAll(PDO::FETCH_OBJ);
@@ -15,7 +15,8 @@ class MusicModel {
     }
     
     public function getSongs() {
-        $query = $this->db->prepare('SELECT canciones.*, albumes.album_nombre FROM canciones INNER JOIN albumes ON canciones.album = albumes.album_id');
+        $query = $this->db->prepare('SELECT canciones.*, albumes.album_nombre FROM canciones INNER JOIN albumes ON canciones.album = albumes.album_id ORDER BY cancion_nombre');
+        
         $query->execute();
         
         $songs = $query->fetchAll(PDO::FETCH_OBJ);

@@ -11,12 +11,20 @@ class SongController {
         $this->view = new SongView();
     }
 
-    public function list() {
-        //le pedimos la lista de canciones y la lista de albumes al modelo
-        $songs = $this->model->getSongs();
-        $albums = $this->model->getAlbums();
-        //mandamos la lista a la vista para que la muestre
-        $this->view->showSongs($songs, $albums);
+    public function list($id = null) {
+        if ( isset($id) ) {
+            //si id != null, pedimos al modelo los datos de la cancion y el album correspondiente, y se lo pasamos al view
+            $song = $this->model->getSong($id);
+            $album = $this->model->getAlbum($song->album);
+
+            $this->view->showSong($song, $album);
+        } else {        
+            //le pedimos la lista de canciones y la lista de albumes al modelo (para el select del form) y lo pasamos al view
+            $songs = $this->model->getSongs();
+            $albums = $this->model->getAlbums();
+
+            $this->view->showSongs($songs, $albums);
+        }
     }
 
     public function save($id = null) {
