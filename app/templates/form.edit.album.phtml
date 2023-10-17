@@ -1,0 +1,28 @@
+<form action="albums/save/<?= $album->album_id ?>" method="POST" class="my-4">
+    <div class="row">
+        <div class="form-group">
+            <label>Editando:</label>
+            <input required name="album" type="text" placeholder="Ingrese el nombre del album" class="form-control" value="<?= $album->album_nombre ?>" >
+        </div>
+
+        <div class="form-group">
+            <label>Artista</label>
+            <input required name="artista" type="text" placeholder="Ingrese el artista" class="form-control" value="<?= $album->artista ?>"> 
+        </div>
+    </div>
+
+    <div class=row>
+        <div class="col-6">
+            <label>Año</label>
+            <input required name="anio" type="number" placeholder="Ingrese el año" class="form-control" value="<?= $album->anio ?>">
+        </div>
+    
+        <div class="col-6">
+            <label>Discográfica</label>
+            <input required name="discografica" type="text" placeholder="Ingrese el sello discográfico" class="form-control" value="<?= $album->discografica ?>">
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-2">Guardar Cambios</button>
+    <a type="button" href="albums/list" class="btn btn-danger mt-2">Cancelar Edicion</a>
+</form>

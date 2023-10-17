@@ -1,0 +1,36 @@
+<form action="songs/save/<?= $song->cancion_id?>" method="POST" class="my-4">
+    <div class="row">
+        <div class="form-group">
+            <label>Editando Canción:</label>
+            <input required name="cancion" type="text" placeholder="Ingrese el nombre de la canción" class="form-control" value="<?= $song->cancion_nombre?>" >
+        </div>
+        <div class="form-group">
+            <label>Album</label>
+            <select required name="album" class="form-control">
+                <option disabled>Seleccione el album</option>
+                <?php foreach ($albums as $item) : ?>
+                    <option 
+                    value="<?= $item->album_id ?>"
+                    <?php if ($item->album_id == $song->album): ?> selected <?php endif ?>>
+                    <?= $item->album_nombre ?> 
+                    </option>
+                <?php endforeach ?>
+            </select>
+        </div>
+    </div>
+
+    <div class=row>
+        <div class="col-6">
+            <label>Duración</label>
+            <input required name="duracion" type="number" placeholder="Ingrese la duración (en segundos" class="form-control" value="<?= $song->duracion ?>">
+        </div>
+    
+        <div class="col-6">
+            <label>Track</label>
+            <input required name="track" type="text" placeholder="Ingrese numero de track" class="form-control" value="<?= $song->track ?>">
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-2">Guardar Cambios</button>
+    <a type="button" href="songs/list" class="btn btn-danger mt-2">Cancelar Edicion</a>
+</form>

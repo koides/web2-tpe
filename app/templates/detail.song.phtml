@@ -1,0 +1,17 @@
+<?php require './app/templates/header.phtml' ?>
+
+<ul class="list-group">
+    <li class="list-group-item item-task">
+        <div>
+            <b><?= $song->cancion_nombre ?></b>
+            | <a href="albums/list/<?= $album->album_id ?>"><?= $album->album_nombre?></a>
+            | <?= $album->artista ?>
+            | Año: <?= $album->anio ?>
+            | Discográfica: <?= $album->discografica ?>
+            | Duración: <?= $song->duracion ?>
+            | Numero de track: <?= $song->track ?>
+        </div>
+    </li>
+</ul>
+
+<?php require './app/templates/footer.phtml' ?>

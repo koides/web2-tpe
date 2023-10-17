@@ -1,0 +1,25 @@
+<?php require './app/templates/header.phtml' ?>
+
+<ul class="list-group">
+    <li class="list-group-item item-task">
+        <div>
+            <b><?= $album->album_nombre ?></b>
+            | <?= $album->artista ?>
+            | Año: <?= $album->anio ?>
+            | Discográfica: <?= $album->discografica ?>
+            | Duración: <?= $duracion ?>
+            | Numero de tracks: <?= $tracks ?>
+        </div>
+    </li>
+    <?php foreach ($songs as $item) : ?>
+        <li class="list-group-item item-task">
+            <div>
+                <b><?= $item->track ?></b> 
+                | <a href="songs/list/<?= $item->cancion_id ?>"><?= $item->cancion_nombre ?></a>
+                | Duración: <?= $item->duracion ?>
+            </div>
+        </li>
+    <?php endforeach ?>
+</ul>
+
+<?php require './app/templates/footer.phtml' ?>
