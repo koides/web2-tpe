@@ -1,11 +1,8 @@
 <?php
 
-class MusicModel{
-    private $db;
-    
-    public function __construct() {
-        $this->db = new PDO(DB_CONNECT_STRING, DB_USER, DB_PASS);
-    }
+require_once './app/models/model.php';
+
+class MusicModel extends Model {
     
     public function getAlbums() {
         $query = $this->db->prepare('SELECT * FROM albumes ORDER BY album_nombre');
@@ -32,9 +29,9 @@ class MusicModel{
         return $album;
     }
 
-    public function getAlbumSongs($id) {
+    public function getAlbumSongs($album_id) {
         $query = $this->db->prepare('SELECT * FROM canciones WHERE album=? ORDER BY track');
-        $query->execute([$id]);
+        $query->execute([$album_id]);
 
         $songs = $query->fetchAll(PDO::FETCH_OBJ);
         return $songs;
@@ -74,18 +71,20 @@ class MusicModel{
 
     public function checkAlbum($id) {
         //hacemos un query contando si el album tiene canciones asignadas
-        $query = $this->db->prepare('SELECT COUNT(cancion_id) FROM canciones WHERE album=?');
+        //$query = $this->db->prepare('SELECT COUNT(cancion_id) FROM canciones WHERE album=?');
+        $query = $this->db->prepare('SELECT cancion_id FROM canciones WHERE album=?');
         $query->execute([$id]);
-        $songCount = $query->fetch(PDO::FETCH_NUM);
+        $songs= $query->fetchAll(PDO::FETCH_NUM);
+        $count = count($songs);
 
-        if ($songCount[0] == 0 ) {
+        if ( $count == 0 ) {
             //en caso de no tenerlas, lo borramos sin mas
             $query = $this->db->prepare('delete from albumes where album_id=?');
             $query->execute([$id]);
         }
 
         //devolvemos la cantidad de canciones, para darle la eleccion al usuario
-        return $songCount[0];
+        return $count; 
     }
 
     public function deleteAlbum($id) {

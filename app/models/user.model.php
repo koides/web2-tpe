@@ -1,11 +1,8 @@
 <?php
 
-class UserModel {
-    private $db;
+require_once './app/models/model.php';
 
-    function __construct() {
-        $this->db = new PDO(DB_CONNECT_STRING, DB_USER, DB_PASS);
-    }
+class UserModel extends Model {
 
     public function getByUser($user) {
         $query = $this->db->prepare('SELECT * FROM usuarios WHERE user=?');

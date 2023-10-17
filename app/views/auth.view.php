@@ -1,11 +1,8 @@
 <?php
 
-class AuthView {
-    private $session;
+require_once './app/views/view.php';
 
-    public function __construct() {
-        $this->session = AuthHelper::check();
-    }
+class AuthView extends View{
 
     public function showLogin($error = null) {
         require './app/templates/login.phtml';

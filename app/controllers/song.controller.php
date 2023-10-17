@@ -13,8 +13,9 @@ class SongController {
 
     public function list($id = null) {
         if ( isset($id) ) {
-            //si id != null, pedimos al modelo los datos de la cancion y el album correspondiente, y se lo pasamos al view
+            //si id != null, pedimos al modelo los datos de la cancion
             $song = $this->model->getSong($id);
+            //pedimos el album correspondiente usando el FK de la cancion, q corresponde al id del album
             $album = $this->model->getAlbum($song->album);
 
             $this->view->showSong($song, $album);

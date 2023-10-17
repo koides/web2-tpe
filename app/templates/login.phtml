@@ -1,6 +1,7 @@
 <?php require './app/templates/header.phtml' ?>
 
 <div class="mt-5 w-25 mx-auto">
+    <?php if ( AuthHelper::check() ) : ?> <h3>La sesion ya fue iniciada</h3> <?php else : ?>
     <form method="POST" action="users/auth">
         <div class="form-group">
             <label for="user">Usuario</label>
@@ -19,6 +20,7 @@
        
         <button type="submit" class="btn btn-primary mt-3">Entrar</button>
     </form>
+    <?php endif ?>
 </div>
 
 <?php require './app/templates/footer.phtml' ?>

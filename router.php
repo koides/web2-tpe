@@ -1,10 +1,11 @@
 <?php
 require_once './app/config/config.php';
+require_once './app/helpers/app.helper.php';
 require_once './app/controllers/album.controller.php';
 require_once './app/controllers/song.controller.php';
 require_once './app/controllers/auth.controller.php';
 
-$action = 'albums/list'; //acction por defecto
+$action = 'albums/list'; //accion por defecto
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
@@ -26,12 +27,36 @@ function parseUrl($url) {
 $params = parseUrl($action);
 $controller;
 
+/*                                  --- TABLA DE ROUTING ---
+
+albums/list         ->      AlbumController()->list();          -Lista todos los albumes
+albums/list/id      ->      AlbumController()->list($id);       -Lista el detalle de un album
+albums/save         ->      AlbumController()->save();          -Guarda un nuevo album desde el form de alta
+albums/edit/id      ->      AlbumController()->edit($id);       -Carga el form de edicion
+albums/save/id      ->      AlbumController()->save($id);       -Guarda modificaciones a un album desde el form de edicion
+albums/remove/id    ->      AlbumController()->remove($id);     -Elimina un album si no tiene dependencias, de tenerlas da la eleccion al usuario
+albums/rmvall/id    ->      AlbumController()->rmvall($id);     -Elimina un album y todas sus dependencias 
+
+songs/list          ->      SongController()->list();           -Lista todas las canciones
+songs/list/id       ->      SongController()->list($id);        -Lista el detalle de una cancion
+songs/save          ->      SongController()->save();           -Guarda una nueva cancion desde el form de alta
+songs/edit/id       ->      SongController()->edit($id);        -Carga el form de edicion
+songs/save/id       ->      SongController()->save($id);        -Guarda modificaciones a una cancion desde el form de edicion
+songs/remove/id     ->      SongController()->remove($id);      -Elimina una cancion
+
+login               ->      AuthController()->login();          -Muestra la seccion de login
+auth                ->      AuthController()->auth();           -Autentica al usuario
+logout              ->      AuthController()->logout();         -Desloguea al usuario
+notfound            ->      AppHelper::notFound(error);         -Muestra un 404
+
+*/
+
 switch ($params['category']) {
     case 'albums':  $controller = new AlbumController();    break;
     case 'songs':   $controller = new SongController();     break;
     case 'users':   $controller = new AuthController();     break;
 
-    default: echo "404 error de categoria";
+    default:   AppHelper::notFound('Pagina no encontrada');
 }
 
 switch ($params['action']) {
@@ -40,9 +65,8 @@ switch ($params['action']) {
     case 'remove':  $controller->remove     ($params['id']);    break;
     case 'edit':    $controller->edit       ($params['id']);    break;
     case 'rmvall':  $controller->rmvall     ($params['id']);    break;
-    case 'login':   $controller->showLogin  ();                 break;
+    case 'login':   $controller->login      ();                 break;
     case 'auth':    $controller->auth       ();                 break;
     case 'logout':  $controller->logout     ();                 break;
 
-    default: echo "404 implementar pls";
 }

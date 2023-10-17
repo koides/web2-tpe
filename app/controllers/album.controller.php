@@ -2,8 +2,7 @@
 require_once './app/views/album.view.php';
 require_once './app/models/music.model.php';
 
-class AlbumController
-{
+class AlbumController {
     private $model;
     private $view;
 

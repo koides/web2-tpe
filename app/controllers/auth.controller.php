@@ -1,4 +1,3 @@
-
 <?php
 require_once './app/views/auth.view.php';
 require_once './app/models/user.model.php';
@@ -13,7 +12,7 @@ class AuthController {
         $this->view = new AuthView();
     }
 
-    public function showLogin() {
+    public function login() {
         $this->view->showLogin();
     }
 

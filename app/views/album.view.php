@@ -1,16 +1,12 @@
 <?php
 
-class AlbumView {
-    private $session;
-    private $form;
+require_once './app/views/view.php';
 
-    public function __construct() {
-        //guardamos el estado de la sesion para saber que mostrar y que no
-        $this->session = AuthHelper::check();
-        $this->form = './app/templates/form.add.album.phtml';  
-    }
+class AlbumView extends View{
 
     public function showAlbums($albums) {
+        //seteamos el form para AGREGAR albumes
+        $form = './app/templates/form.add.album.phtml';  
         require './app/templates/list.albums.phtml';
     }
 
@@ -27,13 +23,15 @@ class AlbumView {
         require './app/templates/detail.album.phtml';
     }
 
-    public function editForm($album, $albums) { 
-        $this->form = './app/templates/form.edit.album.phtml';
+    public function editForm($album, $albums) {
+        //seteamos el form para EDITAR albumes
+        $form = './app/templates/form.edit.album.phtml';
         require './app/templates/list.albums.phtml';
     }
 
     public function removeConfirmation($count, $id, $albums) {
-        $this->form = './app/templates/form.remove.album.phtml';
+        //seteamos el form para BORRAR album y sus dependencias
+        $form = './app/templates/form.remove.album.phtml';
         require './app/templates/list.albums.phtml';
     }
 
