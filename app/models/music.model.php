@@ -1,11 +1,23 @@
 <?php
+<<<<<<< HEAD
+class MusicModel {
+
+    private $db;
+=======
+>>>>>>> ab0b489aa32fd8e01f4b4ea1530655fb23969a0d
 
 require_once './app/models/model.php';
 
+<<<<<<< HEAD
+    public function getMusic() {
+        $query = $this->db->prepare('SELECT * FROM albumes');
+
+=======
 class MusicModel extends Model {
     
     public function getAlbums() {
         $query = $this->db->prepare('SELECT * FROM albumes ORDER BY album_nombre');
+>>>>>>> ab0b489aa32fd8e01f4b4ea1530655fb23969a0d
         $query->execute();
         
         $albums = $query->fetchAll(PDO::FETCH_OBJ);
@@ -28,6 +40,13 @@ class MusicModel extends Model {
         $album = $query->fetch(PDO::FETCH_OBJ);
         return $album;
     }
+<<<<<<< HEAD
+    
+    public function insertMusic($album, $artista, $anio, $discografica) {
+        $query = $this->db->prepare('INSERT INTO albumes (nombre_album, artista, anio, discografica) VALUES(?,?,?,?)');
+        $query->execute([$album, $artista, $anio, $discografica]);
+=======
+>>>>>>> ab0b489aa32fd8e01f4b4ea1530655fb23969a0d
 
     public function getAlbumSongs($album_id) {
         $query = $this->db->prepare('SELECT * FROM canciones WHERE album=? ORDER BY track');
@@ -92,8 +111,14 @@ class MusicModel extends Model {
         $query->execute([$id]);
     }
 
+<<<<<<< HEAD
+    public function saveAlbum($id, $album, $artista, $anio, $discografica) {
+        $query = $this->db->prepare('UPDATE albumes SET nombre_album=?, artista=?, anio=?, discografica=? WHERE album_id=?');
+        $query->execute([$album, $artista, $anio, $discografica, $id]);
+=======
     public function deleteSong($id) {
         $query = $this->db->prepare('DELETE FROM canciones WHERE cancion_id=?');
         $query->execute([$id]);
+>>>>>>> ab0b489aa32fd8e01f4b4ea1530655fb23969a0d
     }
 }
