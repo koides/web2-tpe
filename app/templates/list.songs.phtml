@@ -6,7 +6,7 @@
     <?php foreach ($songs as $item) : ?>
         <li class="list-group-item item-task">
             <div>
-                <a href="songs/list/<?= $item->cancion_id?>">
+                <a href="songs/<?= $item->cancion_id?>">
                 <b><?= $item->cancion_nombre ?></b>
                 </a>
                 | <?= $item->album_nombre ?>
@@ -15,8 +15,8 @@
             </div>
             <?php if ($this->session) : ?>
             <div class="actions">
-                <a href="songs/edit/<?= $item->cancion_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
-                <a href="songs/remove/<?= $item->cancion_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+                <a href="songs-edit/<?= $item->cancion_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
+                <a href="songs-remove/<?= $item->cancion_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
             </div>
             <?php endif ?>
         </li>

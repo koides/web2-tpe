@@ -1,15 +1,16 @@
 <?php
+
+require_once './app/controllers/controller.php';
 require_once './app/views/auth.view.php';
 require_once './app/models/user.model.php';
 require_once './app/helpers/auth.helper.php';
 
-class AuthController {
-    private $view;
+class AuthController extends Controller{
     private $model;
 
     public function __construct() {
-        $this->model = new UserModel();
         $this->view = new AuthView();
+        $this->model = new UserModel();
     }
 
     public function login() {
@@ -32,7 +33,7 @@ class AuthController {
             
             AuthHelper::login($user);
             
-            header('Location: ' . BASE_URL . 'albums/list');
+            header('Location: ' . BASE_URL . 'albums');
         } else {
             $this->view->showLogin('Usuario inválido');
         }
@@ -40,6 +41,6 @@ class AuthController {
 
     public function logout() {
         AuthHelper::logout();
-        header('Location: ' . BASE_URL . 'albums/list');    
+        header('Location: ' . BASE_URL . 'albums');    
     }
 }

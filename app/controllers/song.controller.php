@@ -1,24 +1,31 @@
 <?php
+
+require_once './app/controllers/controller.php';
 require_once './app/views/song.view.php';
 require_once './app/models/music.model.php';
 
-class SongController {
+class SongController extends Controller{
     private $model;
-    private $view;
 
     public function __construct() {
-        $this->model = new MusicModel();
         $this->view = new SongView();
+        $this->model = new MusicModel();
     }
 
     public function list($id = null) {
         if ( isset($id) ) {
             //si id != null, pedimos al modelo los datos de la cancion
             $song = $this->model->getSong($id);
-            //pedimos el album correspondiente usando el FK de la cancion, q corresponde al id del album
-            $album = $this->model->getAlbum($song->album);
-
-            $this->view->showSong($song, $album);
+            //checkeamos si existe en la db
+            if ($song) {
+                //pedimos el album correspondiente usando el FK de la cancion, q corresponde al id del album
+                $album = $this->model->getAlbum($song->album);
+                //pasamos al view
+                $this->view->showSong($song, $album);
+            } else {
+                //la cancion no existe en la db
+                $this->view->showError('La canción solicitada no existe en nuestra base de datos');
+            }
         } else {        
             //le pedimos la lista de canciones y la lista de albumes al modelo (para el select del form) y lo pasamos al view
             $songs = $this->model->getSongs();
@@ -44,18 +51,17 @@ class SongController {
             return;
         }
 
-        if (isset($id)) {
+        if ( isset($id) ) {
             //si se paso id, quiere decir que estoy modificando un item
             $this->model->saveSong($cancion, $album, $duracion, $track, $id);
-            header('Location: ' . BASE_URL . 'songs/list');
+            header('Location: ' . BASE_URL . 'songs');
         } else {
             //de no pasarse un id, se agrega un nuevo item
             $set = $this->model->saveSong($cancion, $album, $duracion, $track, $id);
             if ($set) {
-                header('Location: ' . BASE_URL . 'songs/list');
+                header('Location: ' . BASE_URL . 'songs');
             } else {
-                echo "cuak";
-                //$this->view->showError("Error al insertar la tarea");
+                $this->view->showError("Error al insertar la canción");
             }
         }
     }
@@ -65,7 +71,7 @@ class SongController {
         AuthHelper::verify();
         
         $this->model->deleteSong($id);
-        header('Location:  ' . BASE_URL . 'songs/list');                
+        header('Location:  ' . BASE_URL . 'songs');                
     }
 
     public function edit($id) {

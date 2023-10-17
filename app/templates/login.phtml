@@ -1,8 +1,9 @@
 <?php require './app/templates/header.phtml' ?>
 
+<?php if ( AuthHelper::check() ) : ?><h4>La sesion ya fue iniciada <a href="albums" class="link-secondary link-underline link-underline-opacity-0">(volver)</a></h4>
+<?php else : ?>
 <div class="mt-5 w-25 mx-auto">
-    <?php if ( AuthHelper::check() ) : ?> <h3>La sesion ya fue iniciada</h3> <?php else : ?>
-    <form method="POST" action="users/auth">
+    <form method="POST" action="auth">
         <div class="form-group">
             <label for="user">Usuario</label>
             <input type="text" required class="form-control" id="user" name="user">
@@ -20,7 +21,7 @@
        
         <button type="submit" class="btn btn-primary mt-3">Entrar</button>
     </form>
-    <?php endif ?>
 </div>
+<?php endif ?>
 
 <?php require './app/templates/footer.phtml' ?>

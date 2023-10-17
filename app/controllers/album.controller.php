@@ -1,24 +1,30 @@
 <?php
+
+require_once './app/controllers/controller.php';
 require_once './app/views/album.view.php';
 require_once './app/models/music.model.php';
 
-class AlbumController {
+class AlbumController extends Controller {
     private $model;
-    private $view;
 
     public function __construct() {
-        $this->model = new MusicModel();
         $this->view = new AlbumView();
+        $this->model = new MusicModel();
     }
 
     public function list($id = null) {
         if ( isset($id) ) {
             //si id tiene un valor, pedimos al modelo el album correspondiente
             $album = $this->model->getAlbum($id);
-            $songs = $this->model->getAlbumSongs($id);
-            
-            //se lo pasamos al view
-            $this->view->showAlbum($album, $songs);
+            if ($album) {
+                //pedimos las canciones correspondientes al album
+                $songs = $this->model->getAlbumSongs($id);
+                //le pasamos todo al view
+                $this->view->showAlbum($album, $songs);
+            } else {
+                //el album no existe en la db
+                $this->view->showError('El album solicitado no existe en nuestra base de datos');
+            }
         } else {
             //le pedimos la lista de musica al modelo
             $albums= $this->model->getAlbums();
@@ -40,22 +46,21 @@ class AlbumController {
 
         //validaciones
         if ( empty($album) || empty($artista) || empty($anio) || empty($discografica) ) {
-            //$this->view->showError("Debe completar todos los campos");
+            $this->view->showError("Debe completar todos los campos");
             return;
         }
 
         if ( isset($id) ) {
             //si se paso id, quiere decir que estoy modificando un item
             $this->model->saveAlbum($album, $artista, $anio, $discografica, $id);
-            header('Location: ' . BASE_URL . 'albums/list');
+            header('Location: ' . BASE_URL . 'albums');
         } else {
             //de no pasarse un id, se agrega un nuevo item
             $set = $this->model->saveAlbum($album, $artista, $anio, $discografica);
             if ($set) {
-                header('Location: ' . BASE_URL . 'albums/list');
+                header('Location: ' . BASE_URL . 'albums');
             } else {
-                echo "cuak";
-                //$this->view->showError("Error al insertar la tarea");
+                $this->view->showError("Error al insertar el album");
             }
         }
     }
@@ -69,7 +74,7 @@ class AlbumController {
             $albums = $this->model->getAlbums();
             $this->view->removeConfirmation($count, $id, $albums);
         } else {
-            header('Location: ' . BASE_URL . 'albums/list');                
+            header('Location: ' . BASE_URL . 'albums');                
         }
     }
 
@@ -85,7 +90,7 @@ class AlbumController {
         //finalmente el album
         $this->model->deleteAlbum($id);
 
-        header('Location: ' . BASE_URL . 'albums/list');                
+        header('Location: ' . BASE_URL . 'albums');                
     }
 
     public function edit($id) {
