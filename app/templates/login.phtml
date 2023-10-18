@@ -1,6 +1,6 @@
 <?php require './app/templates/header.phtml' ?>
 
-<?php if ( AuthHelper::check() ) : ?><h4>La sesion ya fue iniciada <a href="albums" class="link-secondary link-underline link-underline-opacity-0">(volver)</a></h4>
+<?php if ( AuthHelper::check() ) : ?><h4>La sesión ya fué iniciada <a href="albums" class="link-secondary link-underline link-underline-opacity-0">(volver)</a></h4>
 <?php else : ?>
 <div class="mt-5 w-25 mx-auto">
     <form method="POST" action="auth">

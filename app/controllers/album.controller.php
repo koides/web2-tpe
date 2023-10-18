@@ -91,7 +91,7 @@ class AlbumController extends Controller {
         //borramos todas las canciones primero
         foreach ($songs as $song) { $this->songModel->deleteSong($song->cancion_id); }
         //finalmente el album
-        $this->model->deleteAlbum($id);
+        $this->albumModel->deleteAlbum($id);
 
         header('Location: ' . BASE_URL . 'albums');                
     }

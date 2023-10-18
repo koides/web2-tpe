@@ -15,7 +15,4 @@ class MusicView {
         $this->form = './app/templates/form.edit.phtml';
         require './app/templates/music.list.phtml';
     }
-    /*public function showError($error) {
-        require 'templates/error.phtml';
-    }*/
 }

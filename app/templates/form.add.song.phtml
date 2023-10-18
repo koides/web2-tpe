@@ -5,9 +5,9 @@
             <input required name="cancion" type="text" placeholder="Ingrese el nombre de la canción" class="form-control">
         </div>
         <div class="form-group">
-            <label>Album</label>
+            <label>Álbum</label>
             <select required name="album" class="form-control">
-                <option selected disabled>Seleccione el album</option>
+                <option selected disabled>Seleccione el álbum</option>
                 <?php foreach ($albums as $item) : ?>
                     <option value="<?= $item->album_id ?>"><?= $item->album_nombre ?></option>
                 <?php endforeach ?>

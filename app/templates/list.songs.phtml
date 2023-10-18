@@ -2,26 +2,32 @@
 
 <?php if ($this->session) : require $form; endif ?>
 
-<h4>Canciones:</h4>
-<ul class="list-group">
-    <?php foreach ($songs as $item) : ?>
-        <li class="list-group-item item-task">
-            <div>
-                <a href="songs/<?= $item->cancion_id?>">
-                <b><?= $item->cancion_nombre ?></b>
-                </a>
-                | <?= $item->album_nombre ?>
-                | Duración : <?= $item->duracion ?>
-                | Track : <?= $item->track ?>
-            </div>
-            <?php if ($this->session) : ?>
-            <div class="actions">
-                <a href="songs-edit/<?= $item->cancion_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
-                <a href="songs-remove/<?= $item->cancion_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
-            </div>
+<h4 class="ps-2 fw-bold">Canciones:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Canción</th>
+            <th>Álbum</th>
+            <th>Duración</th>
+            <th>Track</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($songs as $item) : ?>
+            <tr>
+                <th><a href="songs/<?= $item->cancion_id?>"><?= $item->cancion_nombre ?></a></th>
+                <td><a href="albums/<?= $item->album ?>"><?= $item->album_nombre ?></a></td>
+                <td><?= $item->duracion ?></td>
+                <td><?= $item->track ?></td>
+                <?php if ($this->session) : ?>
+                <td>
+                    <a href="songs-edit/<?= $item->cancion_id ?>" type="button" class='btn btn-warning ml-auto'>Editar</a>
+                    <a href="songs-remove/<?= $item->cancion_id ?>" type="button" class='btn btn-danger ml-auto'>Borrar</a>
+                </td>
+            </tr>
             <?php endif ?>
-        </li>
-    <?php endforeach ?>
-</ul>
+            <?php endforeach ?>
+        </tbody>
+</table>
 
 <?php require './app/templates/footer.phtml' ?>

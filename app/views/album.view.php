@@ -18,7 +18,7 @@ class AlbumView extends View{
             $song->duracion = gmdate("i:s", $song->duracion);
         }
         //convertimos la duracion de segundos a mm:ss
-        $duracion = gmdate("i:s", $duracion);
+        $duracion = ( $duracion > 3600 ) ? gmdate("h:i:s", $duracion) : gmdate("i:s", $duracion);
         $tracks= count($songs);
         require './app/templates/detail.album.phtml';
     }

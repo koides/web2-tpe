@@ -1,6 +1,6 @@
 <?php require './app/templates/header.phtml' ?>
 
-<h4>Detalle de Album:</h4>
+<h4 class="ps-2 fw-bold">Detalle de Álbum:</h4>
 <ul class="list-group">
     <li class="list-group-item item-task">
         <div>
@@ -9,7 +9,7 @@
             | Año: <?= $album->anio ?>
             | Discográfica: <?= $album->discografica ?>
             | Duración: <?= $duracion ?>
-            | Numero de tracks: <?= $tracks ?>
+            | Número de tracks: <?= $tracks ?>
         </div>
     </li>
     <?php foreach ($songs as $item) : ?>
