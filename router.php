@@ -18,6 +18,7 @@ function parseUrl($url) {
     $arrayReturn['fullaction'] = $url_data[0];
     $arrayReturn['id'] = isset($url_data[1]) && $url_data[1] != "" ? $url_data[1] : null;
 
+    return $arrayReturn;
 }
 
 /*                                  --- TABLA DE ROUTING ---
