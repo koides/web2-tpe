@@ -136,6 +136,28 @@ class DbHelper {
             INSERT INTO `usuarios` (`user_id`, `user`, `password`) VALUES
             (1, 'webadmin', '$hash');
 
+            -- --------------------------------------------------------
+
+            --
+            -- Table structure for table `comentarios`
+            --
+
+            CREATE TABLE `comentarios` (
+              `comentario_id` int(3) NOT NULL,
+              `comentario` varchar(300) NOT NULL,
+              `puntuacion` int(1) NOT NULL,
+              `album` int(3) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+            
+            --
+            -- Dumping data for table `comentarios`
+            --
+
+            INSERT INTO `comentarios` (`comentario_id`, `comentario`, `puntuacion`, `album`) VALUES
+            (1, 'el mejor disco de la banda!!', 5, 29),
+            (2, '', 4, 30),
+            (3, 'Tiene mejores pero se deja escuchar', 3, 31);
+
             --
             -- Indexes for dumped tables
             --
@@ -160,6 +182,13 @@ class DbHelper {
               ADD PRIMARY KEY (`user_id`);
 
             --
+            -- Indexes for table `comentarios`
+            --
+            ALTER TABLE `comentarios`
+              ADD PRIMARY KEY (`comentario_id`),
+              ADD KEY `FK_album` (`album`);
+
+            --
             -- AUTO_INCREMENT for dumped tables
             --
 
@@ -182,6 +211,12 @@ class DbHelper {
               MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
             --
+            -- AUTO_INCREMENT for table `comentarios`
+            --
+            ALTER TABLE `comentarios`
+              MODIFY `comentario_id` int(3) NOT NULL AUTO_INCREMENTE, AUTO_INCREMENT=4;
+
+            --
             -- Constraints for dumped tables
             --
 
@@ -190,6 +225,13 @@ class DbHelper {
             --
             ALTER TABLE `canciones`
               ADD CONSTRAINT `canciones_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`album_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+            
+            --
+            -- Constraints for table `comentarios`
+            --
+            ALTER TABLE `comentarios`
+              ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`albun_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;  
+
             COMMIT;
             END;
             $db->query($sql);
