@@ -214,7 +214,7 @@ class DbHelper {
             -- AUTO_INCREMENT for table `comentarios`
             --
             ALTER TABLE `comentarios`
-              MODIFY `comentario_id` int(3) NOT NULL AUTO_INCREMENTE, AUTO_INCREMENT=4;
+              MODIFY `comentario_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
             --
             -- Constraints for dumped tables
@@ -230,7 +230,7 @@ class DbHelper {
             -- Constraints for table `comentarios`
             --
             ALTER TABLE `comentarios`
-              ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`albun_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;  
+              ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`album`) REFERENCES `albumes` (`album_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;  
 
             COMMIT;
             END;

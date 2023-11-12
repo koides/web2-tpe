@@ -4,7 +4,7 @@ require_once './app/controllers/album.controller.php';
 require_once './app/controllers/song.controller.php';
 require_once './app/controllers/auth.controller.php';
 
-$action = 'albums/list'; //accion por defecto
+$action = 'albums'; //accion por defecto
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }

@@ -8,7 +8,6 @@ class SongModel extends Model {
         $query = $this->db->prepare('SELECT canciones.*, albumes.album_nombre FROM canciones INNER JOIN albumes ON canciones.album = albumes.album_id ORDER BY cancion_nombre');
         
         $query->execute();
-        
         $songs = $query->fetchAll(PDO::FETCH_OBJ);
         return $songs;
     }
